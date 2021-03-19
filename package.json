@@ -1,0 +1,18 @@
+{
+  "name": "@aduh95/format-phone-number",
+  "exports": {
+    ".": "./index.js",
+    "./getCountryData": {
+      "node": "./readData.js",
+      "default": "./fetchData.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build": "./scripts/downloadAndParseMetadata.mjs 'https://github.com/google/libphonenumber/raw/master/resources/PhoneNumberMetadata.xml' ./data/ > countryCodes.js",
+    "test": "./test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^8.0.0"
+  }
+}
