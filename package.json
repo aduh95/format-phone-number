@@ -13,7 +13,8 @@
   "types": "./index.d.ts",
   "scripts": {
     "build": "./scripts/downloadAndParseMetadata.mjs 'https://github.com/google/libphonenumber/raw/master/resources/PhoneNumberMetadata.xml' ./data/ > countryCodes.js",
-    "test": "test:node && test:deno",
+    "test": "yarn test:browser && yarn test:node && yarn test:deno",
+    "test:browser": "./test/browser.js",
     "test:node": "./test/node.js",
     "test:deno": "deno test --importmap='./importmap.json' --allow-read='./data/' test/deno.ts"
   },
