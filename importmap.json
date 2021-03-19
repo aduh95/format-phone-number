@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "std::testing": "https://deno.land/std/testing/asserts.ts",
+    "@aduh95/format-phone-number": "./index.js",
+    "@aduh95/format-phone-number/getCountryData": "./fetchData.deno.js",
+    "@aduh95/format-phone-number/types": "./index.d.ts"
+  }
+}

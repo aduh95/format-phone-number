@@ -3,14 +3,19 @@
   "exports": {
     ".": "./index.js",
     "./getCountryData": {
-      "node": "./readData.js",
+      "node": "./fetchData.node.js",
+      "deno": "./fetchData.deno.js",
       "default": "./fetchData.js"
     }
   },
   "type": "module",
+  "module": "./index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "./scripts/downloadAndParseMetadata.mjs 'https://github.com/google/libphonenumber/raw/master/resources/PhoneNumberMetadata.xml' ./data/ > countryCodes.js",
-    "test": "./test.js"
+    "test": "test:node && test:deno",
+    "test:node": "./test/node.js",
+    "test:deno": "deno test --importmap='./importmap.json' --allow-read='./data/' test/deno.ts"
   },
   "devDependencies": {
     "puppeteer": "^8.0.0"
