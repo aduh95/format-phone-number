@@ -11,6 +11,7 @@
   "type": "module",
   "module": "./index.js",
   "types": "./index.d.ts",
+  "bin": "./bin/format-phone-number",
   "scripts": {
     "build": "./scripts/downloadAndParseMetadata.mjs 'https://github.com/google/libphonenumber/raw/master/resources/PhoneNumberMetadata.xml' ./data/ > countryCodes.js",
     "test": "yarn test:browser && yarn test:node && yarn test:deno",

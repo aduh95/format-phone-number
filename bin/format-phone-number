@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+"use strict";
+import("@aduh95/format-phone-number")
+  .then((m) => m.default(process.argv[2]))
+  .then(console.log)
+  .catch(console.error);
