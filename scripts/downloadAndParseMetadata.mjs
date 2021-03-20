@@ -32,23 +32,42 @@ if (
 async function downloadAndParseXML(sourceURL) {
   const xml = await fetch(sourceURL).then((r) => r.text());
   const document = new DOMParser().parseFromString(xml, "application/xml");
+
+  function filter(array) {
+    const leadingDigitSet = new Set();
+    const _return = [];
+    for (let i = array.length; i > 0; --i) {
+      const item = array[i - 1];
+      if (
+        item?.format !== undefined &&
+        item.format !== "NA" &&
+        !leadingDigitSet.has(item.leadingDigits)
+      ) {
+        leadingDigitSet.add(item.leadingDigits);
+        _return.unshift(item);
+      }
+    }
+    return _return;
+  }
   return Array.from(document.querySelectorAll("territory"), (territory) => [
     territory.getAttribute("countryCode"),
-    Array.from(
-      territory
-        .querySelector("availableFormats")
-        ?.querySelectorAll("numberFormat") ?? [],
-      (numberFormat) => ({
-        leadingDigits: numberFormat
-          .querySelector("leadingDigits")
-          ?.textContent.replace(/\s/g, ""),
-        format: (
-          numberFormat.querySelector("intlFormat") ??
-          numberFormat.querySelector("format")
-        )?.textContent,
-        pattern: numberFormat.getAttribute("pattern"),
-      })
-    ).filter(({ format }) => format && format !== "NA"),
+    filter(
+      Array.from(
+        territory
+          .querySelector("availableFormats")
+          ?.querySelectorAll("numberFormat") ?? [],
+        (numberFormat) => ({
+          leadingDigits: numberFormat
+            .querySelector("leadingDigits")
+            ?.textContent.replace(/\s/g, ""),
+          format: (
+            numberFormat.querySelector("intlFormat") ??
+            numberFormat.querySelector("format")
+          )?.textContent,
+          pattern: numberFormat.getAttribute("pattern"),
+        })
+      )
+    ),
   ]).filter((c) => c[1].length);
 }
 

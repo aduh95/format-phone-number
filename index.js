@@ -19,12 +19,16 @@ async function getInfo(phoneNumber) {
 export default async function format(phoneNumber) {
   const [countryCode, national, data] = await getInfo(phoneNumber);
 
-  const { pattern, format } = data.find(({ leadingDigits }) =>
-    new RegExp(`^${leadingDigits}`).test(national)
-  );
+  let formattedNational;
+  for (const { leadingDigits, pattern, format } of data) {
+    if (new RegExp(`^(${leadingDigits})`).test(national)) {
+      const patternRegex = new RegExp(`${pattern}$`);
+      if (patternRegex.test(national)) {
+        formattedNational = national.replace(patternRegex, format);
+        break;
+      }
+    }
+  }
 
-  return `+${countryCode} ${national.replace(
-    new RegExp(`${pattern}$`),
-    format
-  )}`;
+  return `+${countryCode} ${formattedNational || national}`;
 }
