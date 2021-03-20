@@ -1,5 +1,11 @@
 {
   "name": "@aduh95/format-phone-number",
+  "keywords": [
+    "libphonenumber",
+    "format",
+    "phone",
+    "phone number"
+  ],
   "exports": {
     ".": "./index.js",
     "./getCountryData": {
@@ -9,7 +15,6 @@
     }
   },
   "type": "module",
-  "module": "./index.js",
   "types": "./index.d.ts",
   "bin": "./bin/format-phone-number",
   "scripts": {
