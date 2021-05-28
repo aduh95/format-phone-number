@@ -14,6 +14,17 @@
       "default": "./fetchData.js"
     }
   },
+  "files": [
+    "importmap.json",
+    "index.d.ts",
+    "index.js",
+    "fetchData.node.js",
+    "fetchData.deno.js",
+    "fetchData.js",
+    "countryCode.js",
+    "bin/",
+    "data/"
+  ],
   "type": "module",
   "types": "./index.d.ts",
   "bin": "./bin/format-phone-number",
