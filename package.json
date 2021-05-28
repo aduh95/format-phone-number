@@ -21,7 +21,7 @@
     "fetchData.node.js",
     "fetchData.deno.js",
     "fetchData.js",
-    "countryCode.js",
+    "countryCodes.js",
     "bin/",
     "data/"
   ],
